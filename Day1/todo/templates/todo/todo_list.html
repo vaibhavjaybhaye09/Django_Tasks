@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .todo-card {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .actions {
+            margin-top: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2196F3;
+            font-size: 14px;
+            margin-right: 15px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            padding: 6px 12px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    {% for todo in todos %}
+        <div class="todo-card">
+            <h2>{{ todo.title }}</h2>
+            <p>{{ todo.description }}</p>
+            <p><strong>Completed:</strong> {{ todo.completed }}</p>
+            
+            <div class="actions">
+                <a href="{% url 'todo_update' todo.id %}">✏️ Edit</a>
+                <form action="{% url 'todo_delete' todo.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">🗑️ Delete</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <button><a href="{% url 'todo_create' %}">Add New Task</a></button>
+        </div>
+    {% empty %}
+        <p>No tasks yet! ✅</p>
+        <button><a href="{% url 'todo_create' %}">Add New Task</a></button>
+    {% endfor %}
+</body>
+</html>
