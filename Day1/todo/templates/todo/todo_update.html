@@ -65,7 +65,7 @@
 <body>    
     <main>
         <h1>Update To-Do item</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
              {% csrf_token %}
              {{ form }}
             <button type="submit">Update</button>

@@ -4,86 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 20px;
-        }
-
         .todo-card {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-
-        h2 {
-            margin: 0 0 10px;
-            font-size: 20px;
-            color: #333;
+        .todo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
-
-        p {
-            margin: 5px 0;
-            color: #555;
-            font-size: 14px;
+        .completed {
+            background-color: #e6ffed;
+            border-left: 4px solid #22c55e;
         }
-
-        .actions {
-            margin-top: 10px;
+        .add-btn {
+            transition: background-color 0.3s ease;
         }
-
-        a {
-            text-decoration: none;
-            color: #2196F3;
-            font-size: 14px;
-            margin-right: 15px;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        button {
-            padding: 6px 12px;
-            background: #f44336;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #d32f2f;
+        .add-btn:hover {
+            background-color: #16a34a;
         }
     </style>
 </head>
-<body>
-    {% for todo in todos %}
-        <div class="todo-card">
-            <h2>{{ todo.title }}</h2>
-            <p>{{ todo.description }}</p>
-            <p><strong>Completed:</strong> {{ todo.completed }}</p>
-            
-            <div class="actions">
-                <a href="{% url 'todo_update' todo.id %}">✏️ Edit</a>
-                <form action="{% url 'todo_delete' todo.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">🗑️ Delete</button>
-                </form>
-            </div>
+<body class="bg-gray-100 min-h-screen p-6 font-sans">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-800 mb-10 text-center">My To-Do List</h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for todo in todos %}
+                <div class="todo-card bg-white p-8 rounded-xl shadow-lg {% if todo.completed %}completed{% endif %}">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-3">{{ todo.title }}</h2>
+                    <p class="text-gray-600 mb-4 text-lg">{{ todo.description }}</p>
+                    <p class="text-base text-gray-500 mb-6">
+                        <strong>Status:</strong> 
+                        <span class="{% if todo.completed %}text-green-600{% else %}text-red-600{% endif %}">
+                            {{ todo.completed|yesno:"Completed,Pending" }}
+                        </span>
+                    </p>
+
+                    {% if todo.image %}
+                        <div class="mb-6">
+                            <img src="{{ todo.image.url }}" alt="Todo Image" class="max-w-full h-auto rounded-lg" style="max-width: 300px;">
+                        </div>
+                    {% endif %}
+
+                    <div class="flex space-x-4">
+                        <a href="{% url 'todo_update' todo.id %}" class="text-blue-600 hover:text-blue-800 text-base font-medium flex items-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                            Edit
+                        </a>
+                        <form action="{% url 'todo_delete' todo.id %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-600 hover:text-red-800 text-base font-medium flex items-center">
+                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4a1 1 0 011 1v1H9V4a1 1 0 011-1zm-5 4h12"></path>
+                                </svg>
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center text-gray-500 col-span-full text-lg">No tasks yet! ✅ Start by adding a new task.</p>
+            {% endfor %}
         </div>
-        <div>
-            <button><a href="{% url 'todo_create' %}">Add New Task</a></button>
+
+        <div class="mt-10 text-center">
+            <a href="{% url 'todo_create' %}" class="add-btn inline-block bg-green-500 text-white font-medium py-4 px-8 rounded-lg shadow-md hover:bg-green-600 text-lg">
+                ➕ Add New Task
+            </a>
         </div>
-    {% empty %}
-        <p>No tasks yet! ✅</p>
-        <button><a href="{% url 'todo_create' %}">Add New Task</a></button>
-    {% endfor %}
+    </div>
 </body>
 </html>

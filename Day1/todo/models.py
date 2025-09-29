@@ -7,6 +7,7 @@ class Todo(models.Model):
     completed = models.BooleanField(blank=True, default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='images/', max_length=250, null=True, blank=True)
 
     class Meta:
         ordering = ['-created_at']
