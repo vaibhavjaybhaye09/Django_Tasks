@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>User Profile</h2>
+
+<p>Welcome, {{ BankAccount.username }}!</p>
+<p>Email: {{ BankAccount.email }}</p>
+<p>Account Number: {{ BankAccount.account_number }}</p>
+<div>
+    <img src="{{ BankAccount.photo.url }}" alt="load profile">
+</div>
+<p>Phone: {{ BankAccount.phone_no }}</p>
+<h3>Your Bank Accounts type: {{ BankAccount.ac_type }}</h3>
+
+<ul>
+    {% for account in accounts %}
+        <li>Account Number: {{ account.account_number }}, Balance: ${{ account.balance }}</li>
+    {% empty %}
+        <li>No bank accounts found.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'ac_update' %}">Update Your Account</a>
+{% endblock %}
