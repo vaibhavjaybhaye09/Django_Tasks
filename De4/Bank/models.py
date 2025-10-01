@@ -31,7 +31,7 @@ class BankAccount(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.ac_name
-    
+        return self.username   # ✅ Fixed
+
     class Meta:
-        ordering = ['username']
+        ordering = ['username']   # ✅ Fixed
