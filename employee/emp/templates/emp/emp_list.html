@@ -1,0 +1,18 @@
+{% extends 'emp/base.html' %}
+
+{% block content %}
+    <form action="{% url 'emp_form' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add Employee</button>
+    </form>
+    <h2>Employee List</h2>
+    <ul>
+        {% for employee in emplo %}
+            <li>
+                {{ employee.full_name }} - {{ employee.position }}
+                <a href="{% url 'emp_update' employee.id %}">Edit</a>
+                <a href="{% url 'emp_del' employee.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
