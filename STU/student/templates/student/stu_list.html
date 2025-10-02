@@ -1,0 +1,12 @@
+{% extends 'student/base.html' %}
+
+{% block title %} {{ students.name }} {% endblock title %}
+
+{% block content %}
+    {% for student in students %}
+        <p>{{ student.name }}</p>
+        <h6><a href="{% url 'Stu_del' student.pk %}">DELETE</a></h6>
+        <a href="{% url 'stu_update' student.pk %}">Edit</a>
+        <h1><a href="{% url 'stu_create' %}">Create</a></h1>
+    {% endfor %}
+{% endblock content %}
