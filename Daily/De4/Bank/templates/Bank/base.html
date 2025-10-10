@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base_temp</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul> 
+                <li><a href="{% url 'ac_create' %}">CREATE</a></li>
+                                  
+                   
+                
+            </ul>
+        </nav>
+    </header>
+    <h1>Welcome to the Base Template</h1>
+    <p>This is a simple base template for our Django application.</p>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <p>&copy; 2024 My Django Application</p>
+    </footer>
+</body>
+</html>

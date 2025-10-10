@@ -1,0 +1,17 @@
+{% extends 'Bank/base.html' %}
+{% block content %}
+<h2>User Profile</h2>
+
+<p>Welcome, {{ account.username }}!</p>
+<p>Email: {{ account.email }}</p>
+<p>Account Number: {{ account.account_number }}</p>
+<div>
+    <img src="{{ account.photo.url }}" alt="Profile Picture" width="150">
+</div>
+<p>Phone: {{ account.phone_no }}</p>
+<p>Account Type: {{ account.ac_type }}</p>
+<p>Balance: ${{ account.balance }}</p>
+
+<a href="{% url 'ac_update' account.pk %}">Update Account</a> |
+<a href="{% url 'ac_delete' account.pk %}">Delete Account</a>
+{% endblock %}

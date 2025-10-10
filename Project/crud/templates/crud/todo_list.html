@@ -1,0 +1,15 @@
+{% extends 'crud/base.html' %}
+{% block content %}
+<div>
+    {{todo.title}}
+</div>
+<div>
+    {{todo.description}}
+</div>
+<div>
+    {{todo.complete}}
+</div>
+<div>
+    <img src="{{ todo.pic.urls }}" alt="todo">
+</div>
+{% endblock %}

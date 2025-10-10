@@ -1,0 +1,33 @@
+{% extends 'Bank/base.html' %}
+{% block content %}
+<h2>Bank Accounts Dashboard</h2>
+
+{% if accounts %}
+    <ul>
+        {% for account in accounts %}
+            <li>
+                <h3>{{ account.username }}</h3>
+                <p>Email: {{ account.email }}</p>
+                <p>Account Number: {{ account.account_number }}</p>
+                <p>Phone: {{ account.phone_no }}</p>
+                <p>Account Type: {{ account.ac_type }}</p>
+                <p>Balance: ${{ account.balance|default:"0.00" }}</p>
+                <div>
+                    <img src="{{ account.photo.url }}" alt="Profile Picture" width="100">
+                </div>
+
+                <!-- Update/Delete Links inside the loop -->
+                <a href="{% url 'ac_update' account.pk %}">Update</a> |
+                <a href="{% url 'ac_delete' account.pk %}">Delete</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No bank accounts found.</p>
+{% endif %}
+
+<!-- Link to create a new account -->
+<a href="{% url 'ac_create' %}">Create New Account</a>
+
+{% endblock %}
