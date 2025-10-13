@@ -23,7 +23,7 @@ class TodoCreateView(CreateView):
 class TodoDeleteView(DeleteView):
     model = Todo
     template_name = 'todo/todo_del_cnf.html'
-    success_url = reverse_lazy('todo_list'):
+    success_url = reverse_lazy('todo_list')
 
 
 class TodoUpdateView(UpdateView):

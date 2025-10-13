@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog {% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">HOME</a></h1>
+    </header>
+      <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">home</a></li>
+            <li><a href="{% url 'category_list' %}">category_list</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'blog_create' %}">Create_blog</a></li>
+                  <li><a href="{% url 'my_blog' %}">MY Blog</a></li>
+                <li><a href="{% url 'profile' %}">profile</a></li>
+                <li><a href="{% url 'logout' %}">logout ({{user.username}}) </a></li>
+            {% else %}
+            {% comment %} <li><a href="{% url 'login' %}">login  </a></li> {% endcomment %}
+            <li><a href="{% url 'register' %}">register  </a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+    
+    
+</body>
+</html>
