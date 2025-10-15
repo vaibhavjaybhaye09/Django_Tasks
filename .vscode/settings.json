@@ -1,7 +1,0 @@
-{
-    "python.REPL.enableREPLSmartSend": false,
-    "terminal.sourceControlRepositoriesKind": "integrated",
-    "scm.providerCountBadge": "visible",
-    "explorer.excludeGitIgnore": true,
-    "github.copilot.chat.codeGeneration.useInstructionFiles": true
-}
