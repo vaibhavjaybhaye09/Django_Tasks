@@ -1,0 +1,19 @@
+{% extends 'rent/base.html'%}
+
+{% block content %}
+ 
+<div>
+    <h4>
+        this is rent car page
+    </h4>
+   <h4> <a href="{% url 'view_available_cars' %}">Available Cars</a></h4>
+</div>
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Rent Car</button>
+    </form>
+</div>
+
+{% endblock content %}

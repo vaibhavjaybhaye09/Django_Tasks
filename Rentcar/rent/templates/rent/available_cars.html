@@ -1,0 +1,27 @@
+{% extends 'rent/base.html'%}
+
+{% block content %}
+ 
+<div>
+    <h4>
+        this is Available cars page
+    </h4>
+       <h4> <a href="{% url 'home' %}">Home</a></h4>
+</div>
+<div>
+<p>its car Available NOW</p>
+{% for car in cars %}
+   <h6> CAR_ID:{{ car.id }}</h6>
+    <p>{{car}}</p>
+    {% if car.car_image %}
+        <img src="{{ car.car_image.url }}" alt="Car Image" style="max-width:200px; max-height:150px;">
+    {% else %}
+        <p>No image available</p>
+    {% endif %}
+    <hr>
+{% empty %}
+    <p>No cars available at the moment.</p>
+{% endfor %}
+    
+</div>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'rent/base.html'%}
+
+{% block content %}
+ 
+<div>
+    <h4>
+        this is rent car page
+    </h4>
+   <h4> <a href="{% url 'view_available_cars' %}">Available Cars</a></h4>
+</div>
+
+<div>
+<p>these are your rented cars</p>
+    {{rented_cars}}
+</div>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'rent/base.html'%}
+
+{% block content %}
+ 
+<div>
+    <h4>
+        this is home page
+    </h4>
+   <h4> <a href="{% url 'view_available_cars' %}">Available Cars</a></h4>
+   <h4><a href="{% url 'rent_car' %}">Rent Car</a></h4>
+   <h4> <a href="{% url 'view_rented_cars' %}">Rented Cars</a></h4>
+    <h4> <a href="{% url 'view_rental_history' %}">Rental History</a></h4>
+    <h4> <a href="{% url 'return_car' %}">Return Car</a></h4>
+</div>
+
+{% endblock content %}

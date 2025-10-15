@@ -1,0 +1,24 @@
+{% extends 'rent/base.html'%}
+
+{% block content %}
+ 
+<div>
+    <h4>
+        this is rent History page
+    </h4>
+   <h4> <a href="{% url 'view_available_cars' %}">Available Cars</a></h4>
+</div>
+<div>
+<p>these are your rental history</p>
+{% for rental in form %}
+    <h5> CAR_ID:{{ rental.car.id }}</h5>
+    <p> Rented by: {{ rental.username }}</p>
+    <p> Days Rented: {{ rental.days }}</p>
+    <p> Total Cost: ${{ rental.total_cost }}</p>
+    <hr>
+{% empty %}
+    <p>No rental history found.</p>
+{% endfor %}
+</div>
+
+{% endblock content %}
