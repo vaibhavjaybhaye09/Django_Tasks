@@ -1,0 +1,18 @@
+{% extends 'gallary/base.html' %}
+
+{% block content %}
+{% for ph in photos %}
+<div class="card" style="width: 18rem;">
+    {% if ph.image %}
+    <img src="{{ph.image.url}}" class="card-img-top" alt="ok">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ph.title }}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
+            content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+<a href="{% url 'update' ph.id %}">Update</a>
+{% endfor %}
+{% endblock content %}

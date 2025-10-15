@@ -1,0 +1,13 @@
+{% extends 'gallary/base.html'%}
+{% block content %}
+
+<div>
+    <h1> ADD IMAGES </h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit"> Uplaod </button>
+    </form>
+
+</div>
+{% endblock content%}

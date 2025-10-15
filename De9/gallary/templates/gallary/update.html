@@ -1,0 +1,10 @@
+{% extends 'gallary/base.html' %} 
+
+{% block content %}
+
+<form action="" method ="post">
+    {% csrf_token %}
+     {{ form }}
+     <button type="submit"> Update </button>
+</form>
+{% endblock content %}
